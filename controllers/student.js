@@ -7,9 +7,12 @@ const Results = require('../models/results'),
 
 exports.getStudentResult = (req,res,next)=>{
    Students.findOne({'rollno':req.body.rollno}).then((student)=>{
+       if(student){
         
     Results.find({'rollnumber':student.rollno}).then((results)=>{
 
+        if(results){
+        
         const codes=[]
         results.forEach((result)=>{
             codes.push(result.subjectcode)
@@ -18,6 +21,7 @@ exports.getStudentResult = (req,res,next)=>{
         Subjects.find({"code":codes}).then((subs)=>{
             //console.log(subs)
             //console.log(results)
+            if(subs){
             const fresult=[]
             subs.forEach(ele=>{
                 results.forEach(ele2=>{
@@ -30,14 +34,19 @@ exports.getStudentResult = (req,res,next)=>{
 
             console.log(fresult)
             res.render('result',{student:student,results:fresult})
+
+        }else{res.redirect('/')}
         }).catch(errh)
 
-
+    }else{res.redirect('/')}
 
     }).catch(errh)
 
 
-
-}).catch(errh)
-    
+}else{res.redirect('/')}
 }
+
+
+).catch(errh)
+}
+    

@@ -10,21 +10,52 @@
 <body>
     <div class="container">
         <h1>Result Update</h1>
-        <h4>Subject Code:</h4>
-        <h4>Subject Name:</h4>
+        <h4>Subject Code: <%= subject.code %> </h4>
+        <h4>Subject Name: <%= subject.name %></h4>
 
-        <form>
+        <form action="/admin/swupdate/<%= subject.code %>/add" method="POST">
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Roll Number:</label>
-              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="rollno">
               <label for="exampleInputEmail1" class="form-label">Obtain Marks:</label>
-              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="om">
               <label for="exampleInputEmail1" class="form-label">Total Marks</label>
-              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="tm">
+              
+              <input type="hidden" name="scode" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<%= subject.code %>">
               
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+      <table class="table">
+        <thead>
+          <tr>
+            
+            <th scope="col">#</th>
+            <th scope="col">Roll no</th>
+            <th scope="col">Student Name</th>
+            <th scope="col">Obtain Marks</th>
+            <th scope="col">Total Marks</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+            <% for (let result of results){ %>
+          <tr>
+            <th scope="row">1</th>
+             <td><%=result[0]%></td> 
+             <td><%=result[1]%></td> 
+             <td><%=result[2]%></td> 
+             <td><%=result[3]%></td> 
+             <td><form action="/admin/swupdate/<%= subject.code %>/remove" method="POST"><input type="hidden" name="id" value="<%=result[4]%>"><input type="submit" value="Delete"></form></td> 
+            </tr>
+        <% } %>
+            
+            
+          
+         
+        </tbody>
+      </table>
         </div>
 
 </body>

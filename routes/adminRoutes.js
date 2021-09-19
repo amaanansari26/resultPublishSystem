@@ -1,12 +1,10 @@
-const express = require('express');
+const express = require('express'),
+    adminController = require('../controllers/admin'),
+    router = express.Router();
 
-const studentController = require('../controllers/admin');
-
-const router = express.Router();
-
-router.get('/swupdate',(req,res)=>{
-    res.render('swupdate.ejs')
-})
+router.get('/swupdate/:code',adminController.swupdate)
+router.post('/swupdate/:code/add',adminController.swadd)
+router.post('/swupdate/:code/remove',adminController.swremove)
 router.get('/stupdate',(req,res)=>{
     res.render('stupdate.ejs')
 })
