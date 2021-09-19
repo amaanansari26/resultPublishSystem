@@ -10,12 +10,13 @@
 <body>
     <div class="container">
         <h1>Result</h1>
-        <h4>Student Name:</h4>
-        <h4>Student Roll Number:</h4>
+        <h4>Student Name: <%=student.name%></h4>
+        <h4>Student Roll Number: <%=student.rollno%>%></h4>
       
         <table class="table">
             <thead>
               <tr>
+                
                 <th scope="col">#</th>
                 <th scope="col">Subject Code</th>
                 <th scope="col">Subject Name</th>
@@ -24,28 +25,21 @@
               </tr>
             </thead>
             <tbody>
+             
+              <% for (let result of results) { %>
+                
               <tr>
                 <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Otto</td>
+                 <td><%= result[0] %></td> 
+                 <td><%= result[1] %></td> 
+                 <td><%= result[2] %></td> 
+                 <td><%= result[3] %></td> 
+                </tr>
+                <% } %>
                 
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry the Bird</td>
-                <td>@twitter</td>
-                <td>Thornton</td>
-                <td>Thornton</td>
-              </tr>
+                
+              
+             
             </tbody>
           </table>
     </div>

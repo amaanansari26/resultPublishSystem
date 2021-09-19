@@ -21,7 +21,7 @@ const Results = require('./models/results'),
 
 //(new Results({rollnumber:241,subjectcode:"fas",obtainMarks:89,totalMarks:100})).save().then(errh).catch(errh)
 
-(new Students({name:'mdAmaan',rollno:26})).save().then(errh).catch(errh)
+//(new Students({name:'mdAmaan',rollno:26})).save().then(errh).catch(errh)
 //(new Subjects({name:'DBMS',code:"dwdw"})).save().then(errh).catch(errh)
 
 mongoose.connect(MONGODB_URI).then(

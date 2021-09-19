@@ -10,4 +10,5 @@ router.get('/',(req,res)=>{
 router.get('/result',(req,res)=>{
     res.render('result.ejs')
 })
+router.post('/results',studentController.getStudentResult)
 module.exports = router;
