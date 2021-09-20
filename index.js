@@ -13,6 +13,9 @@ app.set('views', 'views');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(studentRoutes)
 app.use('/admin',adminRoutes)
+app.use('/',(req,res)=>{
+    res.sendStatus(404)
+})
 //routes
 //populate
 const Results = require('./models/results'),

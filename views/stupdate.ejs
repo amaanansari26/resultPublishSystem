@@ -9,27 +9,55 @@
 </head>
 <body>
     <div class="container">
-        <h1>Result Update</h1>
-        <h4>Student Name:</h4>
-        <h4>Student Roll Number:</h4>
-
-        <form>
+        <h1>Result</h1>
+        <h4>Student Name: <%=student.name%></h4>
+        <h4>Student Roll Number: <%=student.rollno%></h4>
+        <form action="/admin/stupdate/<%=student._id%>/add" method="POST">
             <div class="mb-3">
-                <select class="form-select" aria-label="Default select example">
+                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="scode">
                     <option selected>Choose Subject</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <% for (let subject of subjects) { %>
+                    <option value="<%=subject.code%>"><%=subject.code%>:<%=subject.name%></option>
+                    <% } %>
                   </select>
               <label for="exampleInputEmail1" class="form-label">Obtain Marks:</label>
-              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-              <label for="exampleInputEmail1" class="form-label">Total Marks</label>
-              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="om">
+              <label for="exampleInputEmail1" class="form-label">Total Marks:</label>
+              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="tm">
               
           </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-        </div>
-
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+          <table class="table">
+            <thead>
+              <tr>
+                
+                <th scope="col">#</th>
+                <th scope="col">Subject Code</th>
+                <th scope="col">Subject Name</th>
+                <th scope="col">Obtain Marks</th>
+                <th scope="col">Total Marks</th>
+              </tr>
+            </thead>
+            <tbody>
+                           <% for (let result of results) { %>
+                
+              <tr>
+                <th scope="row">1</th>
+                 <td><%= result[0] %></td> 
+                 <td><%= result[1] %></td> 
+                 <td><%= result[2] %></td> 
+                 <td><%= result[3] %></td> 
+                 <td><form action="/admin/stupdate/<%=student._id%>/remove" method="POST"><input type="hidden" name="rid" value="<%= result[4] %>"><input type="submit" value="Delete"></form></td> 
+                </tr>
+                <% } %>
+                
+                
+              
+             
+            </tbody>
+          </table>
+    </div>
 </body>
 </html>
