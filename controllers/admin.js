@@ -3,6 +3,7 @@ const results = require('../models/results')
 const Results = require('../models/results'),
     Students = require('../models/students'),
     Subjects = require('../models/subjects'),
+    Users=require('../models/user')
     errh=(err)=>{console.log(err)}
 
 exports.swupdate = (req,res)=>{
@@ -283,6 +284,32 @@ exports.removeStudent=(req,res)=>{
 
 
 exports.adminDb=(req,res)=>{
-
+    
     res.render('adminDb')
+}
+exports.login=(req,res)=>{
+    console.log(req.body)
+    if(req.session.user){
+        return res.redirect('/admin')
+    }
+    return res.render('login')
+}
+exports.logout=(req,res)=>{
+    req.session.destroy()
+    res.redirect('/admin/login')
+}
+exports.getAuth=(req,res)=>{
+    const username=req.body.username,
+        password=req.body.password
+    
+    Users.findOne({'username':username}).then(user=>{
+        console.log(user.password)
+        console.log(password)
+        if(user && user.password==password){
+            console.log('trigger')
+            console.log(user)
+            req.session.user=user
+            return res.redirect('/admin')
+        }else{return res.redirect('/admin/login')}
+    }).catch(errh)
 }
